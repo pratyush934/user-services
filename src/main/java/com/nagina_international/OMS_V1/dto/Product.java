@@ -14,7 +14,6 @@ import lombok.ToString;
  * name and asin for a product whenever a user searches using sku.
  */
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
