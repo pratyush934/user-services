@@ -2,6 +2,7 @@ package com.nagina_international.OMS_V1.entity;
 
 import java.util.Date;
 
+import com.nagina_international.OMS_V1.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

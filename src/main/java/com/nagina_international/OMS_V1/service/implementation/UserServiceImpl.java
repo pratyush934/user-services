@@ -1,8 +1,8 @@
 package com.nagina_international.OMS_V1.service.implementation;
 
-import com.nagina_international.OMS_V1.entity.User;
-import com.nagina_international.OMS_V1.repository.RoleRepository;
-import com.nagina_international.OMS_V1.repository.UserRepository;
+import com.nagina_international.OMS_V1.entity.user.User;
+import com.nagina_international.OMS_V1.repository.role.RoleRepository;
+import com.nagina_international.OMS_V1.repository.user.UserRepository;
 import com.nagina_international.OMS_V1.service.UserService;
 import org.springframework.stereotype.Service;
 

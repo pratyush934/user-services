@@ -1,6 +1,6 @@
 package com.nagina_international.OMS_V1.controller;
 
-import com.nagina_international.OMS_V1.entity.User;
+import com.nagina_international.OMS_V1.entity.user.User;
 import com.nagina_international.OMS_V1.service.implementation.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

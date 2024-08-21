@@ -1,5 +1,9 @@
-package com.nagina_international.OMS_V1.entity;
+package com.nagina_international.OMS_V1.entity.user;
 
+import com.nagina_international.OMS_V1.entity.Order;
+import com.nagina_international.OMS_V1.entity.adress.Address;
+import com.nagina_international.OMS_V1.entity.message.Message;
+import com.nagina_international.OMS_V1.entity.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -8,7 +12,10 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +27,7 @@ import java.util.Set;
 @ToString
 @Builder
 @Entity(name = "user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,4 +71,31 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+//        return UserDetails.super.isAccountNonExpired();
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+        //        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+//        return UserDetails.super.isCredentialsNonExpired();
+    }
 }

@@ -1,5 +1,6 @@
-package com.nagina_international.OMS_V1.entity;
+package com.nagina_international.OMS_V1.entity.message;
 
+import com.nagina_international.OMS_V1.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
