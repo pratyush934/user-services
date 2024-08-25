@@ -6,6 +6,8 @@ import com.nagina_international.OMS_V1.repository.user.UserRepository;
 import com.nagina_international.OMS_V1.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -24,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        User user= userRepository.getUserByEmail(email);
+        Optional<User> user= userRepository.findByEmail(email);
         System.out.println(user);
-        return user;
+        return user.orElse(null);
     }
 }

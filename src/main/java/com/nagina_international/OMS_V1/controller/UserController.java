@@ -4,29 +4,16 @@ import com.nagina_international.OMS_V1.entity.user.User;
 import com.nagina_international.OMS_V1.service.implementation.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
-    private UserServiceImpl userServiceImpl;
-
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
-    }
-
-    @PostMapping("/add-user")
-    public ResponseEntity<?> saveUser(@RequestBody User user) {
-        return new ResponseEntity<>(userServiceImpl.save(user), HttpStatus.OK);
-    }
-
-    @GetMapping("/get-user")
-    public ResponseEntity<?> getUserByEmail(@RequestParam String email) {
-        User user = userServiceImpl.getUserByEmail(email);
-        if (user == null) {
-            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        } else
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+    @GetMapping("/test")
+    @PreAuthorize("hasRole('USER')")
+    public String getTestingDone() {
+        return "Kaa baat kar rahe hai";
     }
 }
