@@ -6,7 +6,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +62,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+            logger.debug("Request to '{}', Authentication: {}", request.getRequestURI(), authentication);
+
             if (userName != null && authentication == null) {
                 UserDetails userDetails = userRepository.
                         findByEmail(userName)
@@ -71,9 +72,13 @@ public class JwtFilter extends OncePerRequestFilter {
                 if (jwtService.isTokenValid(jwt, userDetails)) {
 
                     List<String> roles = jwtService.extractRoles(jwt);
+
+                    logger.debug("Extracted username from JWT: {}", userName);
+                    logger.debug("Extracted roles from JWT: {}", roles);
+
                     List<SimpleGrantedAuthority> authorities = roles
                             .stream()
-                            .map(SimpleGrantedAuthority::new)
+                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                             .toList();
 
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -83,6 +88,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     );
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    logger.debug("Set authentication in SecurityContext: {}", SecurityContextHolder.getContext().getAuthentication());
                 }
             }
 

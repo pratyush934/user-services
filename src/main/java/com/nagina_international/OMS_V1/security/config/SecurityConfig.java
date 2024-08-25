@@ -48,11 +48,11 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PATCH, "/api/v1/user/**").hasAnyRole("ADMIN", "USER")
 
                                 //admin-permissions
-                                .requestMatchers(HttpMethod.GET, "/api/v1/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/api/v1/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/api/v1/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/api/v1/admin/**").hasAnyRole("ADMIN")
-                                .requestMatchers(HttpMethod.PATCH, "/api/v1/admin/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/v1/admin/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PATCH, "/api/v1/admin/**").hasRole("ADMIN")
 
                                 //dispatcher-permissions
                                 .requestMatchers(HttpMethod.GET, "/api/v1/dispatcher/**").hasAnyRole("DISPATCHER", "ADMIN")
