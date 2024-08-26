@@ -77,7 +77,7 @@ public class User implements UserDetails {
         //this was creating the issue, damn idiot
         return roles
                 .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
                 .toList();
     }
 

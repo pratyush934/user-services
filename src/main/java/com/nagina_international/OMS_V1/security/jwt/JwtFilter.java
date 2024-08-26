@@ -78,7 +78,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
                     List<SimpleGrantedAuthority> authorities = roles
                             .stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                            .map(role -> new SimpleGrantedAuthority(role))
                             .toList();
 
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -90,13 +90,15 @@ public class JwtFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                     logger.debug("Set authentication in SecurityContext: {}", SecurityContextHolder.getContext().getAuthentication());
                 }
+            } else {
+                logger.warn("Token is not validated for the user: {}", userName);
             }
 
             filterChain.doFilter(request, response);
 
 
         } catch (Exception e) {
-            logger.warn("The issue exist in the method doFilterInternal in the class JwtFilter, {}", e.getMessage());
+            logger.error("The issue exist in the method doFilterInternal in the class JwtFilter", e);
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
 
