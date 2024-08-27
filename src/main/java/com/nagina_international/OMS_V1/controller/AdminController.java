@@ -19,4 +19,6 @@ public class AdminController {
         logger.debug("Admin test endpoint accessed");
         return "Test1";
     }
+
+
 }
