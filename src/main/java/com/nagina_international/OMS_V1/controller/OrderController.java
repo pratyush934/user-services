@@ -5,16 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.nagina_international.OMS_V1.entity.Order;
 import com.nagina_international.OMS_V1.service.OrderService;
 
 @RestController
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+
+    @GetMapping("/testing")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String goodBoy() {
+        return "GoodBoy";
+    }
 
 	@GetMapping("/orders")
 	public ResponseEntity<List<Order>> getAllOrders() {
