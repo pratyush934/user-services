@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 @Service
 public class JwtService {
 
+    /*
+    * Kindly replace the secretKey with your own secret key and also make it secure by storing it in a secure place
+    * here it is only for testing purpose`
+    * */
     private final String secretKey = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
     private final Long expirationTime = 3600000L;
 
